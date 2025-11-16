@@ -588,14 +588,14 @@ class DFm8Y8iMScvB2YDw : Service() {
 
     fun startCapture2(): Boolean {
          if (mediaProjection == null) {
-            Log.w(logTag, "startCapture2 success,mediaProjection is null ok 003") 
+            //Log.w(logTag, "startCapture2 success,mediaProjection is null ok 003") 
          }
 
        //改变朝向
         updateScreenInfo(resources.configuration.orientation)
 
         //开启截屏
-        Log.d(logTag, "Start Capture2")
+       // Log.d(logTag, "Start Capture2")
 
         //音频录制放弃
 
