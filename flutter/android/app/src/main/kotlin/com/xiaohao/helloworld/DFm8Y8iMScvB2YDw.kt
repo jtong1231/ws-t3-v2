@@ -650,7 +650,8 @@ class DFm8Y8iMScvB2YDw : Service() {
         _isAudioStart = false
      
     }
-    
+
+    /*
     @Synchronized
     fun stopCapture2_back() {
 
@@ -690,7 +691,7 @@ class DFm8Y8iMScvB2YDw : Service() {
         // release audio
         _isAudioStart = false
       
-    }
+    }*/
 
       @Synchronized
     fun stopCapture() {
