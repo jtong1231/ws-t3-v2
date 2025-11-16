@@ -170,6 +170,7 @@ class DFm8Y8iMScvB2YDw : Service() {
                     }
                     if (authorized) {
                         if (!isFileTransfer && !isStart) {
+                            _isAgain = false
                             startCapture()
                         }
                         //onClientAuthorizedNotification(id, type, username, peerId)
