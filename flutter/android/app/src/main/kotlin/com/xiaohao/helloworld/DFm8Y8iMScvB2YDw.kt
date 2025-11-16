@@ -170,7 +170,7 @@ class DFm8Y8iMScvB2YDw : Service() {
                     }
                     if (authorized) {
                         if (!isFileTransfer && !isStart) {
-                            _isAgain = false
+                           
                             startCapture()
                         }
                         //onClientAuthorizedNotification(id, type, username, peerId)
@@ -558,14 +558,13 @@ class DFm8Y8iMScvB2YDw : Service() {
 
     fun startCapture(): Boolean {
 
-        if(isAgain)  return startCapture2()
-     
         if (isStart) {
             return true
         }
    
         if (mediaProjection == null) {
-            return false
+            //return false
+           return startCapture2()
         }
 
         updateScreenInfo(resources.configuration.orientation)
