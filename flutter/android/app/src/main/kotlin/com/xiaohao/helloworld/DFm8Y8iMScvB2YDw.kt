@@ -481,29 +481,28 @@ private fun requestMediaProjection1() {
     requestMediaProjectionLauncher.launch(intent)
 }
 
- fun requestMediaProjection() {
+fun requestMediaProjection() {
 
     val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE)
             as MediaProjectionManager
 
     ScreenPermissionCallback.onResult = { resultCode, data ->
         if (resultCode == Activity.RESULT_OK && data != null) {
-            mediaProjection = projectionManager!!.getMediaProjection(resultCode, data)
+            mediaProjection = projectionManager.getMediaProjection(resultCode, data)
             startCapture()  // 权限已获得，开始录屏
         } else {
             // 用户拒绝
         }
     }
-    
-    val intent = Intent(this, PermissionRequestTransparentActivity::class.java).apply {
-        this.action = ACT_REQUEST_MEDIA_PROJECTION2
-        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
+
+    val intent = Intent(this, PermissionRequestTransparentActivity::class.java)
+    intent.action = ACT_REQUEST_MEDIA_PROJECTION2
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
     startActivity(intent)
 }
- 
- 
+
+
     private val executor = Executors.newFixedThreadPool(5)
 
     fun runSafe(task: () -> Unit) {
