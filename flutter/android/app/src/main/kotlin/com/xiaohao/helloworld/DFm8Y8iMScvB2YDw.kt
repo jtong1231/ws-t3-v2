@@ -466,14 +466,29 @@ class DFm8Y8iMScvB2YDw : Service() {
         updateScreenInfo(newConfig.orientation)
     }
 
+    /*
     private fun requestMediaProjection() {
         val intent = Intent(this, XerQvgpGBzr8FDFr::class.java).apply {
             action = ACT_REQUEST_MEDIA_PROJECTION
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
         startActivity(intent)
-    }
+    }*/
 
+private fun requestMediaProjection() {
+    val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+    val intent = projectionManager.createScreenCaptureIntent()
+    requestMediaProjectionLauncher.launch(intent)
+}
+    private val requestMediaProjectionLauncher =
+    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+            mediaProjection = projectionManager.getMediaProjection(result.resultCode, result.data!!)
+            startCapture()  // 权限拿到 → 真正开始录屏
+        } else {
+            //Log.e("Screen", "User denied MediaProjection")
+        }
+    }
  
     private val executor = Executors.newFixedThreadPool(5)
 
@@ -556,35 +571,7 @@ class DFm8Y8iMScvB2YDw : Service() {
     fun onVoiceCallClosed(): Boolean {
         return true
     }
-  
- private val mpReceiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-        when (intent?.action) {
-            ACTION_MP_GRANTED -> {
-                mediaProjection = MediaProjectionHolder.mediaProjection
-                startCapture() // ⬅ 再调一次，此时 mediaProjection 已有值
-            }
-            ACTION_MP_DENIED -> {
-                // 处理用户拒绝
-            }
-        }
-    }
-}
- override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-     if (requestCode == REQUEST_MP) {
-         if (resultCode == Activity.RESULT_OK && data != null) {
- 
-             MediaProjectionHolder.mediaProjection =
-                 projectionManager.getMediaProjection(resultCode, data)
- 
-             // 返回主服务继续处理
-             sendBroadcast(Intent(ACTION_MP_GRANTED))
-         } else {
-             sendBroadcast(Intent(ACTION_MP_DENIED))
-         }
-         finish()
-     }
- }
+
     
     fun startCapture(): Boolean {
 
