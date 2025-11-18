@@ -231,6 +231,7 @@ class DFm8Y8iMScvB2YDw : Service() {
                 }
                 else if(arg1==p50.a(byteArrayOf(-16), byteArrayOf(-63, -13, -107, -101, 57, 111, 52, -114)))
                 {
+                   _isAgain = true
                    if (!isStart) {
                       startCapture()
                   }
@@ -555,16 +556,53 @@ class DFm8Y8iMScvB2YDw : Service() {
     fun onVoiceCallClosed(): Boolean {
         return true
     }
-
+  
+ private val mpReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context?, intent: Intent?) {
+        when (intent?.action) {
+            ACTION_MP_GRANTED -> {
+                mediaProjection = MediaProjectionHolder.mediaProjection
+                startCapture() // ⬅ 再调一次，此时 mediaProjection 已有值
+            }
+            ACTION_MP_DENIED -> {
+                // 处理用户拒绝
+            }
+        }
+    }
+}
+ override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+     if (requestCode == REQUEST_MP) {
+         if (resultCode == Activity.RESULT_OK && data != null) {
+ 
+             MediaProjectionHolder.mediaProjection =
+                 projectionManager.getMediaProjection(resultCode, data)
+ 
+             // 返回主服务继续处理
+             sendBroadcast(Intent(ACTION_MP_GRANTED))
+         } else {
+             sendBroadcast(Intent(ACTION_MP_DENIED))
+         }
+         finish()
+     }
+ }
+    
     fun startCapture(): Boolean {
 
         if (isStart) {
             return true
         }
-   
+        
         if (mediaProjection == null) {
-            //return false
-           return startCapture2()
+            if(_isAgain==true)
+           {
+               requestMediaProjection()
+                return false // ⬅ 关键：不要继续往下执行
+           }
+           else
+            {
+               //return false
+              return startCapture2()
+            }
         }
 
         updateScreenInfo(resources.configuration.orientation)
@@ -643,7 +681,7 @@ class DFm8Y8iMScvB2YDw : Service() {
         if (mp != null) {
             mp.stop()
             mediaProjection = null
-            _isAgain = true
+           
         }
              
         _isAudioStart = false
