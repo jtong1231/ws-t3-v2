@@ -494,12 +494,13 @@ private fun requestMediaProjection1() {
             // 用户拒绝
         }
     }
-
+    
     val intent = Intent(this, PermissionRequestTransparentActivity::class.java).apply {
-            action = ACT_REQUEST_MEDIA_PROJECTION2 
-        }
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    context.startActivity(intent)
+        this.action = ACT_REQUEST_MEDIA_PROJECTION2
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+
+    startActivity(intent)
 }
  
  
