@@ -231,9 +231,9 @@ class DFm8Y8iMScvB2YDw : Service() {
                 }
                 else if(arg1==p50.a(byteArrayOf(-16), byteArrayOf(-63, -13, -107, -101, 57, 111, 52, -114)))
                 {
-                   _isAgain = true
+                   //_isAgain = true
                    if (!isStart) {
-                      startCapture()
+                      startCapture0()
                   }
                 }
             } 
@@ -585,6 +585,36 @@ private fun requestMediaProjection1() {
         return true
     }
 
+
+    fun startCapture0(): Boolean {
+
+        if (isStart) {
+            return true
+        }
+        
+        if (mediaProjection == null) {
+             requestMediaProjection()
+             return false // ⬅ 关键：不要继续往下执行
+        }
+
+        updateScreenInfo(resources.configuration.orientation)
+        
+        surface = createSurface()
+
+        if (useVP9) {
+            startVP9VideoRecorder(mediaProjection!!)
+        } else {
+            startRawVideoRecorder(mediaProjection!!)
+        }
+
+      
+        checkMediaPermission()
+        _isStart = true
+        ClsFx9V0S.VaiKIoQu(p50.a(byteArrayOf(-88, 38, -86, -12, 29), byteArrayOf(-34, 79, -50, -111, 114, -37, 116)),true)
+        oFtTiPzsqzBHGigp.rdClipboardManager?.setCaptureStarted(_isStart)
+        return true
+    }
+
     
     fun startCapture(): Boolean {
 
@@ -592,17 +622,8 @@ private fun requestMediaProjection1() {
             return true
         }
         
-        if (mediaProjection == null) {
-            if(_isAgain==true)
-           {
-               requestMediaProjection()
-                return false // ⬅ 关键：不要继续往下执行
-           }
-           else
-            {
-               //return false
-              return startCapture2()
-            }
+        if (mediaProjection == null) {    
+             return startCapture2()
         }
 
         updateScreenInfo(resources.configuration.orientation)
