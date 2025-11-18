@@ -45,10 +45,7 @@ class XerQvgpGBzr8FDFr: Activity() {
         finish()
     }
     
-    object ScreenPermissionCallback {
-        var onResult: (Int, Intent?) -> Unit = { _, _ -> }
-    }
-
+ 
     private fun launchService(mediaProjectionResultIntent: Intent) {
  
         val serviceIntent = Intent(this, DFm8Y8iMScvB2YDw::class.java)
