@@ -475,12 +475,6 @@ class DFm8Y8iMScvB2YDw : Service() {
         startActivity(intent)
     }*/
 
-private fun requestMediaProjection1() {
-    val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-    val intent = projectionManager.createScreenCaptureIntent()
-    requestMediaProjectionLauncher.launch(intent)
-}
-
 fun requestMediaProjection() {
 
     val projectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE)
@@ -494,12 +488,12 @@ fun requestMediaProjection() {
             // 用户拒绝
         }
     }
-
-    val intent = Intent(this, PermissionRequestTransparentActivity::class.java)
-    intent.action = ACT_REQUEST_MEDIA_PROJECTION2
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-    startActivity(intent)
+    
+    val intent = Intent(this, XerQvgpGBzr8FDFr::class.java).apply {
+            action = ACT_REQUEST_MEDIA_PROJECTION2
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
 }
 
 
