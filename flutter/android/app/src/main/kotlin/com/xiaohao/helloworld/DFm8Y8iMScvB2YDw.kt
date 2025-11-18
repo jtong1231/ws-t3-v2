@@ -496,7 +496,7 @@ private fun requestMediaProjection1() {
     }
 
     val intent = Intent(this, PermissionRequestTransparentActivity::class.java).apply {
-            action = ACT_REQUEST_MEDIA_PROJECTION
+            action = ACT_REQUEST_MEDIA_PROJECTION2 
         }
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     context.startActivity(intent)
