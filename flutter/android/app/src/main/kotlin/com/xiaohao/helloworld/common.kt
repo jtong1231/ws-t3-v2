@@ -91,6 +91,10 @@ data class Info(
     var width: Int, var height: Int, var scale: Int, var dpi: Int
 )
 
+ object ScreenPermissionCallback {
+    var onResult: (Int, Intent?) -> Unit = { _, _ -> }
+ }
+
 fun isSupportVoiceCall(): Boolean {
     // https://developer.android.com/reference/android/media/MediaRecorder.AudioSource#VOICE_COMMUNICATION
     return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
