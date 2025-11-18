@@ -32,8 +32,15 @@ class XerQvgpGBzr8FDFr: Activity() {
                 setResult(RES_FAILED)
             }
         }
+        else  if (requestCode == 1000) {
+            ScreenPermissionCallback.onResult(resultCode, data)
+        }
 
         finish()
+    }
+    
+    object ScreenPermissionCallback {
+        var onResult: (Int, Intent?) -> Unit = { _, _ -> }
     }
 
     private fun launchService(mediaProjectionResultIntent: Intent) {
