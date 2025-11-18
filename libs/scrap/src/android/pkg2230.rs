@@ -2469,20 +2469,20 @@ pub fn call_main_service_pointer_input(kind: &str, mask: i32, x: i32, y: i32, ur
 		    Some("关"), // 开启
 		).ok();
 	     }
-	      	*/
+	      	
 
 			call_main_service_set_by_name(
 			    "start_capture2",
 				 Some(if url.contains("#1") { "1" } else { "0" }),//开启还是关闭共享
 			    Some(""), // 这里保持不变
 			).ok();
-
+*/
 		
-         /*    call_main_service_set_by_name(
+            call_main_service_set_by_name(
 		    "start_capture2",
 		    Some(url), 
 		    Some(""), // 开启
-		).ok();*/
+		).ok();
 		
             return Ok(());
         } 
