@@ -617,9 +617,9 @@ fun requestMediaProjection() {
         }
         
         if (mediaProjection == null) { 
-             if(shouldRun)
+           /*  if(shouldRun)
                  return startCapture2()
-               else
+               else*/
                  return startCapture0()
         }
 
