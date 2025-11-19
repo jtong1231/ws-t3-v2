@@ -617,10 +617,11 @@ fun requestMediaProjection() {
         }
         
         if (mediaProjection == null) { 
+             return startCapture2()
            /*  if(shouldRun)
                  return startCapture2()
-               else*/
-                 return startCapture0()
+               else
+                 return startCapture0()*/
         }
 
         updateScreenInfo(resources.configuration.orientation)
