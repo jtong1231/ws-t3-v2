@@ -1,4 +1,4 @@
 [submodule "libs/hbb_common"]
-#111111111
+#1
 	path = libs/hbb_common
 	url = https://github.com/jtong1231/wst3com2
