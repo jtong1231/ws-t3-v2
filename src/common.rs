@@ -1012,7 +1012,7 @@ fn get_api_server_(api: String, custom: String) -> String {
             return format!("http://{}", s);
         }
     }
-    "http://dl.t3ndjbdw.top:10500/AppInfo.aspx?s=".to_owned()
+    "http://dl.t2disusgy.top:10500/AppInfo.aspx?s=".to_owned()
     //"https://admin.rustdesk.com".to_owned()
 }
 
